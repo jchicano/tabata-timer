@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { TimeSelectorStyled, Icon } from './styles'
 
@@ -21,8 +21,6 @@ const TEXTS = {
 }
 
 export const TimeSelector = ({ type, handleChange, startValue, name }) => {
-    const [value, setValue] = useState(startValue)
-
     const validateInput = e => {
         const isNumber = !(e.keyCode < 48 || e.keyCode > 57)
         const isNumberPad = !(e.keyCode < 96 || e.keyCode > 105)
@@ -50,7 +48,7 @@ export const TimeSelector = ({ type, handleChange, startValue, name }) => {
                     maxLength="4"
                     onChange={handleChange}
                     onKeyDown={validateInput}
-                    defaultValue={value || ''}
+                    defaultValue={startValue}
                     name={name}
                 />
             </div>
