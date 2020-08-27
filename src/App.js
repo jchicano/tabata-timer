@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import { Clock } from './components/Clock'
 import { Title } from './components/Titles'
 import { WorkoutCreator } from './components/WorkoutCreator'
 import { TotalWorkout } from './components/TotalWorkout'
+import { Working } from './components/Working'
 
 const AppStyled = styled.section`
     width: 100%;
@@ -53,14 +53,17 @@ function App() {
             <Title text={'Tabata Timer'} />
 
             {running ? (
-                <Clock time={workout.preparation} color="red" />
+                <Working workout={workout} />
             ) : (
                 <Division>
                     <WorkoutCreator
                         handleInputs={handleInputs}
                         workout={workout}
                     />
-                    <TotalWorkout workout={workout} />
+                    <TotalWorkout
+                        workout={workout}
+                        handleStart={startWorkout}
+                    />
                 </Division>
             )}
         </AppStyled>
