@@ -2,23 +2,30 @@ import styled from 'styled-components'
 
 export const TimeSelectorStyled = styled.div`
     width: 100%;
-    height: 80px;
     padding: 1rem;
 
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
+    grid-template-columns: 80% 1fr;
 
-    /* background-color: ${props => (props.color ? props.color : 'blue')}; */
-    border: 3px solid ${props => (props.color ? props.color : 'blue')};
+    background-color: ${props => (props.color ? props.color : '#3268a8')};
+    border: 3px solid ${props => (props.color ? props.color : '#3268a8')};
+
+    color: #fff;
 
     .selector-type {
+        width: 100%;
+        height: 100%;
+
         display: grid;
-        grid-template-columns: 1fr 3fr;
+        grid-template-columns: 10% 1fr;
         align-items: center;
 
         span {
             font-size: 1.5rem;
+
+            i {
+                margin-right: 16px;
+            }
         }
     }
 
@@ -35,11 +42,14 @@ export const TimeSelectorStyled = styled.div`
             font-size: 2rem;
 
             text-align: right;
+
+            border: none;
+            border-radius: 6px;
         }
     }
 `
 
 export const Icon = styled.i`
     font-size: 50px;
-    color: ${props => (props.color ? props.color : 'blue')};
+    color: #fff;
 `

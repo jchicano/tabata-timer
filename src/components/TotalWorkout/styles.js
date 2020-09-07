@@ -7,7 +7,8 @@ export const TotalWorkoutStyled = styled.div`
     flex-direction: column;
     align-items: center;
 
-    background-color: #ccc;
+    background-color: #f2f2f2;
+    border: 1px solid #f2f2f2;
 `
 
 export const Workout = styled.div`
@@ -16,12 +17,13 @@ export const Workout = styled.div`
     max-height: 50vh;
     padding: 0 10px;
     padding-top: 2rem;
+    padding-bottom: 2rem;
     margin: 1.5rem 0;
-
-    background-color: #fff;
 
     display: flex;
     flex-direction: column;
+
+    background-color: #fff;
 
     overflow-y: auto;
 

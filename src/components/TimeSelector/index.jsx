@@ -1,15 +1,7 @@
 import React from 'react'
 
 import { TimeSelectorStyled, Icon } from './styles'
-
-const ICONS = {
-    work: 'fas fa-running',
-    rest: 'fas fa-chair',
-    longRest: 'fas fa-couch',
-    prepare: 'fas fa-spinner',
-    sets: 'fas fa-retweet',
-    cycles: 'fas fa-redo',
-}
+import { ICONS } from '../../utils/icons'
 
 const TEXTS = {
     work: 'Ejercicio',
@@ -20,7 +12,13 @@ const TEXTS = {
     cycles: 'Rondas',
 }
 
-export const TimeSelector = ({ type, handleChange, startValue, name }) => {
+export const TimeSelector = ({
+    type,
+    handleChange,
+    startValue,
+    name,
+    color,
+}) => {
     const validateInput = e => {
         const isNumber = !(e.keyCode < 48 || e.keyCode > 57)
         const isNumberPad = !(e.keyCode < 96 || e.keyCode > 105)
@@ -36,7 +34,7 @@ export const TimeSelector = ({ type, handleChange, startValue, name }) => {
     }
 
     return (
-        <TimeSelectorStyled>
+        <TimeSelectorStyled color={color}>
             <div className="selector-type">
                 <Icon className={ICONS[type] || ICONS.work}></Icon>
                 <span>{TEXTS[type] || ''}</span>

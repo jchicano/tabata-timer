@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
-import { arrayFromNumber } from '../../utils'
+import { arrayFromNumber } from '../../utils/utils'
 
 import { WorkoutItem } from '../WorkoutItem'
-import { Subtitle } from '../Titles'
+import { Subtitle, WorkoutTitle } from '../Titles'
 import { StartButton } from '../Buttons'
 
 import { TotalWorkoutStyled, Workout } from './styles'
@@ -22,6 +22,8 @@ export const TotalWorkout = ({ workout = null, handleStart }) => {
                         <WorkoutItem
                             text="Preparación"
                             time={workout.preparation}
+                            type="prepare"
+                            color="#eb983f"
                         />
                     </div>
                 )}
@@ -29,14 +31,14 @@ export const TotalWorkout = ({ workout = null, handleStart }) => {
                 {arrayFromNumber(workout?.cycles).map((cycle, index) => {
                     return (
                         <div key={`cycle_${index}`}>
-                            <Subtitle text={`Ronda ${index + 1}`} />
-
                             {arrayFromNumber(workout.sets).map((set, i) => {
                                 return (
                                     <div key={`set_${i}`}>
                                         <WorkoutItem
                                             text="Ejercicio"
                                             time={workout.work}
+                                            color="#32a852"
+                                            type="work"
                                         />
 
                                         {i === workout.sets - 1 ? (
@@ -44,9 +46,15 @@ export const TotalWorkout = ({ workout = null, handleStart }) => {
                                                 <WorkoutItem
                                                     text="Descanso largo"
                                                     time={workout.longRest}
+                                                    type="prepare"
+                                                    color="#3268a8"
                                                 />
                                             ) : (
-                                                <Subtitle text={'¡Fin!'} />
+                                                <WorkoutTitle
+                                                    text={'¡Fin!'}
+                                                    color="#db3421"
+                                                    type="finish"
+                                                />
                                             )
                                         ) : (
                                             <WorkoutItem
