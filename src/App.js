@@ -45,6 +45,11 @@ function App() {
     }
 
     const startWorkout = () => {
+        /* if (workout.work <= 0 || workout.cycles <= 0 || workout.sets <= 0) {
+            alert('Ingrese tiempos validos')
+            return
+        } */
+
         setRunning(true)
     }
 

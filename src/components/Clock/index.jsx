@@ -1,23 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 import { ClockStyled } from './styles'
 
-export const Clock = ({ time, color }) => {
-    const [timeState, setTimeState] = useState(time)
+import { COLOR_TYPE } from '../../utils/colors'
 
-    const timer = () => {
-        setTimeout(() => {
-            if (timeState > 0) {
-                setTimeState(timeState - 1)
-            }
-        }, 1000)
-    }
-
-    useEffect(timer, [timeState])
-
+export const Clock = ({ time, type }) => {
     return (
-        <ClockStyled color={color}>
-            <h1>{timeState}</h1>
+        <ClockStyled color={COLOR_TYPE[type]}>
+            <h1>{time}</h1>
         </ClockStyled>
     )
 }

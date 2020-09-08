@@ -68,9 +68,8 @@ export const TotalWorkout = ({ workout = null, handleStart }) => {
                         </div>
                     )
                 })}
-
-                <StartButton handleClick={handleStart} text={'¡Comenzar!'} />
             </Workout>
+            <StartButton handleClick={handleStart} text={'¡Comenzar!'} />
         </TotalWorkoutStyled>
     )
 }
