@@ -39,6 +39,7 @@ export const WorkoutCreator = ({ handleInputs, workout }) => {
                 type="longRest"
                 handleChange={handleInputs}
                 name="longRest"
+                color="#69d6a0"
             />
         </Selectors>
     )
