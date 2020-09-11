@@ -9,6 +9,9 @@ import { Timer } from '../../utils/timer'
 
 import { AppContext } from '../../App'
 
+import tick from '../../sounds/tick.mp3'
+import ding from '../../sounds/ding.mp3'
+
 export const Working = ({ workout, handleFinish }) => {
     const [time, setTime] = useState(workout.preparation)
     const [type, setType] = useState('prepare')
@@ -79,6 +82,18 @@ export const Working = ({ workout, handleFinish }) => {
     useEffect(timer, [time])
 
     useEffect(() => {
+        if (time <= 3 && time > 0) {
+            const audio = new Audio(tick)
+            audio.play()
+        } else if (time === 0) {
+            if (type !== 'finish') {
+                const audio = new Audio(ding)
+                audio.play()
+            }
+        }
+    }, [time, type])
+
+    useEffect(() => {
         if (currentIndex >= 1) {
             if (currentIndex >= workoutArray.length) {
                 setType('finish')
@@ -92,11 +107,6 @@ export const Working = ({ workout, handleFinish }) => {
     useEffect(() => {
         setBg(COLOR_TYPE[type])
     }, [type, setBg])
-
-    useEffect(() => {
-        console.log('time', time)
-        console.log('index', currentIndex)
-    }, [currentIndex, time])
 
     return (
         <>
