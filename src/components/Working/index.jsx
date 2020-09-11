@@ -80,10 +80,7 @@ export const Working = ({ workout, handleFinish }) => {
 
     useEffect(() => {
         if (currentIndex >= 1) {
-            console.log(currentIndex)
-            console.log(workoutArray.length - 1)
-            console.log(workoutArray)
-            if (currentIndex >= workoutArray.length - 1) {
+            if (currentIndex >= workoutArray.length) {
                 setType('finish')
             } else {
                 setTime(workoutArray[currentIndex].time)
@@ -120,6 +117,7 @@ export const Working = ({ workout, handleFinish }) => {
                     timerState.pause()
                     setTime(workoutArray[0].time)
                     setCurrentIndex(0)
+                    setType('prepare')
                 }}
             />
         </>
