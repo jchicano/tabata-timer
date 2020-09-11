@@ -11,11 +11,10 @@ import { AppContext } from '../../App'
 
 export const Working = ({ workout, handleFinish }) => {
     const [time, setTime] = useState(workout.preparation)
-    const [isPause, setIsPause] = useState(false)
     const [type, setType] = useState('prepare')
     const [currentIndex, setCurrentIndex] = useState(0)
     const [workoutArray, setWorkoutArray] = useState([])
-    const { setBg } = useContext(AppContext)
+    const { setBg, setRunning } = useContext(AppContext)
     const [timerState, setTimerState] = useState(new Timer())
 
     const timer = () => {
@@ -75,26 +74,9 @@ export const Working = ({ workout, handleFinish }) => {
         setWorkoutArray(fakeArray)
     }
 
-    const togglePause = () => {
-        if (isPause) {
-            setIsPause(false)
-        } else {
-            setIsPause(true)
-        }
-    }
-
     useEffect(createWorkoutArray, [])
 
     useEffect(timer, [time])
-
-    useEffect(() => {
-        console.log(isPause)
-        if (isPause) {
-            timerState.pause()
-        } else {
-            timerState.resume()
-        }
-    }, [isPause, timerState])
 
     useEffect(() => {
         if (currentIndex >= 1) {
@@ -103,7 +85,6 @@ export const Working = ({ workout, handleFinish }) => {
             console.log(workoutArray)
             if (currentIndex >= workoutArray.length - 1) {
                 setType('finish')
-                alert('Rutina terminada')
             } else {
                 setTime(workoutArray[currentIndex].time)
                 setType(workoutArray[currentIndex].type)
@@ -115,13 +96,31 @@ export const Working = ({ workout, handleFinish }) => {
         setBg(COLOR_TYPE[type])
     }, [type, setBg])
 
+    useEffect(() => {
+        console.log('time', time)
+        console.log('index', currentIndex)
+    }, [currentIndex, time])
+
     return (
         <>
             <Clock time={time} type={type} />
             <TimeControls
-                handleStop={togglePause}
-                isPause={isPause}
-                handleResume={togglePause}
+                handlePause={() => {
+                    timerState.pause()
+                }}
+                isPause={false}
+                handleResume={() => {
+                    timerState.resume()
+                }}
+                handleStop={() => {
+                    setRunning(false)
+                    setBg('#fff')
+                }}
+                handleRestart={() => {
+                    timerState.pause()
+                    setTime(workoutArray[0].time)
+                    setCurrentIndex(0)
+                }}
             />
         </>
     )

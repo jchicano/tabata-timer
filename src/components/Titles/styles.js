@@ -6,7 +6,8 @@ export const TitleStyled = styled.h1`
     line-height: 3rem;
     padding: 0.5em 1em;
     margin: 2rem 0;
-    color: ${({ color }) => (color ? color : 'black')};
+    color: ${({ color }) =>
+        color !== '#fff' && color !== 'white' ? color : 'black'};
     background: rgba(255, 255, 255, 0.5);
 
     border: 8px solid

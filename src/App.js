@@ -38,7 +38,7 @@ function App() {
     }
 
     return (
-        <AppContext.Provider value={{ bg, setBg }}>
+        <AppContext.Provider value={{ setBg, setRunning }}>
             <AppStyled background={bg}>
                 <Title text={'Tabata Timer'} color={bg} />
 
