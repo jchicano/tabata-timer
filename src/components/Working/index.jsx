@@ -65,7 +65,7 @@ export const Working = ({ workout, handleFinish }) => {
                     if (indexCycle < workout.cycles - 1) {
                         const longRest = {
                             type: 'longRest',
-                            time: workout.rest,
+                            time: workout.longRest,
                         }
 
                         fakeArray.push(longRest)
