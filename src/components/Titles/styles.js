@@ -8,7 +8,7 @@ export const TitleStyled = styled.h1`
     margin: 2rem 0;
     color: ${({ color }) =>
         color !== '#fff' && color !== 'white' ? color : 'black'};
-    background: rgba(255, 255, 255, 0.5);
+    background: '#fff';
 
     border: 8px solid
         ${({ color }) => (color ? darken('-0.1', color) : 'transparent')};

@@ -4,7 +4,7 @@ import { Clock } from '../Clock'
 import { TimeControls } from '../TimeControls'
 
 import { createWorkoutArray } from '../../utils/utils'
-import { COLOR_TYPE } from '../../utils/constants'
+import { COLOR_TYPE, TEXTS } from '../../utils/constants'
 import { Timer } from '../../utils/timer'
 import { Title } from '../Titles'
 
@@ -63,28 +63,35 @@ export const Working = ({ workout }) => {
         }
     }, [currentIndex, workoutArray])
 
+    const restartWorkout = () => {
+        timerState.pause()
+        setTime(workoutArray[0].time)
+        setCurrentIndex(0)
+        setType('prepare')
+    }
+
+    const stopWorkout = () => {
+        setBg('#fff')
+        setRunning(false)
+    }
+
+    const resumeWorkout = () => {
+        timerState.resume()
+    }
+
+    const pauseWorkout = () => {
+        timerState.pause()
+    }
+
     return (
         <>
-            <Title text={'Aca va el titulo'} type={type} />
+            <Title text={String(TEXTS[type]).toUpperCase()} type={type} />
             <Clock time={time} type={type} />
             <TimeControls
-                handlePause={() => {
-                    timerState.pause()
-                }}
-                isPause={false}
-                handleResume={() => {
-                    timerState.resume()
-                }}
-                handleStop={() => {
-                    setRunning(false)
-                    setBg('#fff')
-                }}
-                handleRestart={() => {
-                    timerState.pause()
-                    setTime(workoutArray[0].time)
-                    setCurrentIndex(0)
-                    setType('prepare')
-                }}
+                handlePause={pauseWorkout}
+                handleResume={resumeWorkout}
+                handleStop={stopWorkout}
+                handleRestart={restartWorkout}
             />
         </>
     )
