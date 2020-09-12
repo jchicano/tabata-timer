@@ -56,5 +56,10 @@ export const createWorkoutArray = workout => {
         })
     })
 
+    fakeArray.push({
+        type: 'finish',
+        time: 0,
+    })
+
     return fakeArray
 }

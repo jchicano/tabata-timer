@@ -13,7 +13,7 @@ import { AppContext } from '../../App'
 import tick from '../../assets/sounds/tick.mp3'
 import ding from '../../assets/sounds/ding.mp3'
 
-export const Working = ({ workout, handleFinish }) => {
+export const Working = ({ workout }) => {
     const [time, setTime] = useState(workout.preparation)
     const [type, setType] = useState('prepare')
     const [currentIndex, setCurrentIndex] = useState(0)
@@ -26,44 +26,40 @@ export const Working = ({ workout, handleFinish }) => {
         setWorkoutArray(createWorkoutArray(workout))
     }, [workout])
 
+    //timer
     useEffect(() => {
         const t = new Timer(() => {
             if (time > 0) {
                 setTime(time - 1)
             } else {
-                const newIndex = currentIndex + 1
-                setCurrentIndex(newIndex)
+                setCurrentIndex(prevIndex => prevIndex + 1)
             }
         }, 1000)
 
         setTimerState(t)
     }, [time])
 
-    /* useEffect(() => {
-        if (time === 0) {
-        }
-
+    //audios
+    useEffect(() => {
         if (time > 0 && time <= 3) {
             const audio = new Audio(tick)
             audio.play()
         } else if (time === 0) {
-            setCurrentIndex(currentIndex + 1)
-
-            if (type !== 'finish') {
-                const audio = new Audio(ding)
-                audio.play()
-            }
+            const audio = new Audio(ding)
+            audio.play()
         }
-    }, [time, type]) */
+    }, [time, type])
 
+    //bagkground
     useEffect(() => {
-        if (currentIndex >= 1) {
-            if (currentIndex >= workoutArray.length) {
-                setType('finish')
-            } else {
-                setTime(workoutArray[currentIndex].time)
-                setType(workoutArray[currentIndex].type)
-            }
+        setBg(COLOR_TYPE[type])
+    }, [type, setBg])
+
+    //pasar al siguiente elemento del workoutArray
+    useEffect(() => {
+        if (currentIndex > 0) {
+            setTime(workoutArray[currentIndex].time)
+            setType(workoutArray[currentIndex].type)
         }
     }, [currentIndex, workoutArray])
 
