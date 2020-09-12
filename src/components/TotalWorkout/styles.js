@@ -7,8 +7,8 @@ export const TotalWorkoutStyled = styled.div`
     flex-direction: column;
     align-items: center;
 
-    background-color: #f2f2f2;
-    border: 1px solid #f2f2f2;
+    background-color: #ffff;
+    border-radius: 8px;
 `
 
 export const Workout = styled.div`
@@ -38,7 +38,7 @@ export const Workout = styled.div`
 
     /* Handle */
     ::-webkit-scrollbar-thumb {
-        background: #32a852;
+        background: #3268a8;
         border-radius: 6px;
     }
 

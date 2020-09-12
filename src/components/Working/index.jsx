@@ -37,6 +37,8 @@ export const Working = ({ workout }) => {
         }, 1000)
 
         setTimerState(t)
+
+        return () => t.stop()
     }, [time])
 
     //audios
@@ -71,7 +73,7 @@ export const Working = ({ workout }) => {
     }
 
     const stopWorkout = () => {
-        setBg('#fff')
+        setBg(COLOR_TYPE['initial'])
         setRunning(false)
     }
 

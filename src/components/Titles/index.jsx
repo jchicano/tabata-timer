@@ -4,7 +4,7 @@ import { TitleStyled, SubtitleStyled, WorkoutTitleStyled } from './styles'
 import { ICONS, COLOR_TYPE } from '../../utils/constants'
 
 export const Title = ({ text, type }) => {
-    const color = type ? COLOR_TYPE[type] : 'black'
+    const color = type ? COLOR_TYPE[type] : '#fff'
     const bg = type ? 'rgba(255, 255, 255, 0.5)' : 'transparent'
     const border = type ? COLOR_TYPE[type] : 'transparent'
 

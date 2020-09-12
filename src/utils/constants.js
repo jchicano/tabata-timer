@@ -26,4 +26,5 @@ export const COLOR_TYPE = {
     finish: '#3268a8',
     sets: '#3268a8',
     cycles: '#3268a8',
+    initial: '#3268a8',
 }

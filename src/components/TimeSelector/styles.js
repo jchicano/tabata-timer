@@ -9,6 +9,7 @@ export const TimeSelectorStyled = styled.div`
 
     background-color: ${props => (props.color ? props.color : '')};
     border: 3px solid ${props => (props.color ? props.color : '')};
+    border-radius: 6px;
 
     color: #fff;
 

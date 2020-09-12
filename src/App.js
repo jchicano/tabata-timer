@@ -5,12 +5,14 @@ import { WorkoutCreator } from './components/WorkoutCreator'
 import { TotalWorkout } from './components/TotalWorkout'
 import { Working } from './components/Working'
 
+import { COLOR_TYPE } from './utils/constants'
+
 import { AppStyled, Division } from './styles'
 
 export const AppContext = React.createContext({})
 
 function App() {
-    const [bg, setBg] = useState('')
+    const [bg, setBg] = useState(COLOR_TYPE['initial'])
     const [running, setRunning] = useState(false)
     const [workout, setWorkout] = useState({
         preparation: 1,

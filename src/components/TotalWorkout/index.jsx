@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { arrayFromNumber } from '../../utils/utils'
 
 import { WorkoutItem } from '../WorkoutItem'
@@ -8,10 +8,6 @@ import { StartButton } from '../Buttons'
 import { TotalWorkoutStyled, Workout } from './styles'
 
 export const TotalWorkout = ({ workout = null, handleStart }) => {
-    useEffect(() => {
-        console.log(workout)
-    }, [workout])
-
     return (
         <TotalWorkoutStyled>
             <Subtitle text={'Rutina'} />

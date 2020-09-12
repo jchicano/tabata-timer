@@ -14,5 +14,9 @@ export const Timer = function (callback, delay) {
         timerId = window.setTimeout(callback, remaining)
     }
 
+    this.stop = function () {
+        window.clearTimeout(timerId)
+    }
+
     this.resume()
 }
