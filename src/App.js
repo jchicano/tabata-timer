@@ -46,7 +46,7 @@ function App() {
                     </>
                 ) : (
                     <>
-                        <Title text={'Tabata Timer'} color={bg} />
+                        <Title text={'Tabata Timer'} />
                         <Division>
                             <WorkoutCreator
                                 handleInputs={handleInputs}
