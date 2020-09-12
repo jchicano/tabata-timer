@@ -15,6 +15,7 @@ export const TEXTS = {
     prepare: 'Preparación',
     sets: 'Series',
     cycles: 'Rondas',
+    finish: 'Entrenamiento terminado',
 }
 
 export const COLOR_TYPE = {

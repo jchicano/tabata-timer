@@ -15,8 +15,8 @@ export const AppStyled = styled.section`
     background: ${props =>
         props.color
             ? linearGradient({
-                  colorStops: [props.color, darken(0.2, props.color)],
-                  toDirection: 'to bottom left',
+                  colorStops: [props.color, darken(0.3, props.color)],
+                  toDirection: 'to bottom',
                   fallback: '#fff',
               })
             : ''};

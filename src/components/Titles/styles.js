@@ -6,9 +6,9 @@ export const TitleStyled = styled.h1`
     line-height: 3rem;
     padding: 0.5em 1em;
     margin: 2rem 0;
-    color: ${({ color }) => color && darken('-0.1', color)};
-    background: ${({ bg }) => (bg ? bg : 'transparent')};
-    border: 8px solid ${({ bg }) => (bg ? darken('-0.1', bg) : 'transparent')};
+    color: ${props => props.color};
+    background: ${props => props.bg};
+    border: 10px solid ${props => darken('-0.1', props.border)};
     border-radius: 1em;
 `
 
