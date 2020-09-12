@@ -1,24 +1,9 @@
 import React from 'react'
 
 import { TimeSelectorStyled, Icon } from './styles'
-import { ICONS } from '../../utils/icons'
+import { ICONS, TEXTS, COLOR_TYPE } from '../../utils/constants'
 
-const TEXTS = {
-    work: 'Ejercicio',
-    rest: 'Descanso',
-    longRest: 'Descanso entre rondas',
-    prepare: 'Preparación',
-    sets: 'Series',
-    cycles: 'Rondas',
-}
-
-export const TimeSelector = ({
-    type,
-    handleChange,
-    startValue,
-    name,
-    color,
-}) => {
+export const TimeSelector = ({ type, handleChange, startValue, name }) => {
     const validateInput = e => {
         const isNumber = !(e.keyCode < 48 || e.keyCode > 57)
         const isNumberPad = !(e.keyCode < 96 || e.keyCode > 105)
@@ -34,7 +19,7 @@ export const TimeSelector = ({
     }
 
     return (
-        <TimeSelectorStyled color={color}>
+        <TimeSelectorStyled color={COLOR_TYPE[type]}>
             <div className="selector-type">
                 <Icon className={ICONS[type] || ICONS.work}></Icon>
                 <span>{TEXTS[type] || ''}</span>

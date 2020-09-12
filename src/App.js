@@ -13,12 +13,12 @@ function App() {
     const [bg, setBg] = useState('')
     const [running, setRunning] = useState(false)
     const [workout, setWorkout] = useState({
-        preparation: 15,
-        work: 0,
-        rest: 0,
-        cycles: 1,
-        sets: 1,
-        longRest: 0,
+        preparation: 1,
+        work: 1,
+        rest: 1,
+        cycles: 2,
+        sets: 2,
+        longRest: 1,
     })
 
     const handleInputs = e => {
@@ -39,24 +39,25 @@ function App() {
 
     return (
         <AppContext.Provider value={{ setBg, setRunning }}>
-            <AppStyled background={bg}>
-                <Title text={'Tabata Timer'} color={bg} />
-
+            <AppStyled color={bg}>
                 {running ? (
                     <>
                         <Working workout={workout} />
                     </>
                 ) : (
-                    <Division>
-                        <WorkoutCreator
-                            handleInputs={handleInputs}
-                            workout={workout}
-                        />
-                        <TotalWorkout
-                            workout={workout}
-                            handleStart={startWorkout}
-                        />
-                    </Division>
+                    <>
+                        <Title text={'Tabata Timer'} color={bg} />
+                        <Division>
+                            <WorkoutCreator
+                                handleInputs={handleInputs}
+                                workout={workout}
+                            />
+                            <TotalWorkout
+                                workout={workout}
+                                handleStart={startWorkout}
+                            />
+                        </Division>
+                    </>
                 )}
             </AppStyled>
         </AppContext.Provider>

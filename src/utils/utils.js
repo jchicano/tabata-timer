@@ -15,3 +15,46 @@ export const arrayFromNumber = number => {
 
     return array
 }
+
+export const createWorkoutArray = workout => {
+    const fakeArray = [
+        {
+            type: 'prepare',
+            time: workout.preparation,
+        },
+    ]
+
+    arrayFromNumber(workout.cycles).forEach((cycle, indexCycle) => {
+        arrayFromNumber(workout.sets).forEach((set, indexSet) => {
+            if (workout.work > 0) {
+                const work = {
+                    type: 'work',
+                    time: workout.work,
+                }
+                fakeArray.push(work)
+            }
+
+            if (workout.rest > 0 && indexSet < workout.sets - 1) {
+                const rest = {
+                    type: 'rest',
+                    time: workout.rest,
+                }
+
+                fakeArray.push(rest)
+            }
+
+            if (workout.longRest > 0 && indexSet === workout.sets - 1) {
+                if (indexCycle < workout.cycles - 1) {
+                    const longRest = {
+                        type: 'longRest',
+                        time: workout.longRest,
+                    }
+
+                    fakeArray.push(longRest)
+                }
+            }
+        })
+    })
+
+    return fakeArray
+}

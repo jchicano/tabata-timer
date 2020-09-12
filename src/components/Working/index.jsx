@@ -3,14 +3,15 @@ import React, { useEffect, useState, useContext } from 'react'
 import { Clock } from '../Clock'
 import { TimeControls } from '../TimeControls'
 
-import { arrayFromNumber } from '../../utils/utils'
-import { COLOR_TYPE } from '../../utils/colors'
+import { createWorkoutArray } from '../../utils/utils'
+import { COLOR_TYPE } from '../../utils/constants'
 import { Timer } from '../../utils/timer'
+import { Title } from '../Titles'
 
 import { AppContext } from '../../App'
 
-import tick from '../../sounds/tick.mp3'
-import ding from '../../sounds/ding.mp3'
+import tick from '../../assets/sounds/tick.mp3'
+import ding from '../../assets/sounds/ding.mp3'
 
 export const Working = ({ workout, handleFinish }) => {
     const [time, setTime] = useState(workout.preparation)
@@ -20,78 +21,40 @@ export const Working = ({ workout, handleFinish }) => {
     const { setBg, setRunning } = useContext(AppContext)
     const [timerState, setTimerState] = useState(new Timer())
 
-    const timer = () => {
+    //Crea el array del workout a partir del objeto workout de las props
+    useEffect(() => {
+        setWorkoutArray(createWorkoutArray(workout))
+    }, [workout])
+
+    useEffect(() => {
         const t = new Timer(() => {
             if (time > 0) {
                 setTime(time - 1)
             } else {
-                setCurrentIndex(currentIndex + 1)
+                const newIndex = currentIndex + 1
+                setCurrentIndex(newIndex)
             }
         }, 1000)
 
         setTimerState(t)
-    }
+    }, [time])
 
-    useEffect(() => {})
+    /* useEffect(() => {
+        if (time === 0) {
+        }
 
-    const createWorkoutArray = () => {
-        const fakeArray = [
-            {
-                type: 'prepare',
-                time: workout.preparation,
-            },
-        ]
-
-        arrayFromNumber(workout.cycles).forEach((cycle, indexCycle) => {
-            arrayFromNumber(workout.sets).forEach((set, indexSet) => {
-                if (workout.work > 0) {
-                    const work = {
-                        type: 'work',
-                        time: workout.work,
-                    }
-                    fakeArray.push(work)
-                }
-
-                if (workout.rest > 0 && indexSet < workout.sets - 1) {
-                    const rest = {
-                        type: 'rest',
-                        time: workout.rest,
-                    }
-
-                    fakeArray.push(rest)
-                }
-
-                if (workout.longRest > 0 && indexSet === workout.sets - 1) {
-                    if (indexCycle < workout.cycles - 1) {
-                        const longRest = {
-                            type: 'longRest',
-                            time: workout.longRest,
-                        }
-
-                        fakeArray.push(longRest)
-                    }
-                }
-            })
-        })
-
-        setWorkoutArray(fakeArray)
-    }
-
-    useEffect(createWorkoutArray, [])
-
-    useEffect(timer, [time])
-
-    useEffect(() => {
-        if (time <= 3 && time > 0) {
+        if (time > 0 && time <= 3) {
             const audio = new Audio(tick)
             audio.play()
         } else if (time === 0) {
+            setCurrentIndex(currentIndex + 1)
+
             if (type !== 'finish') {
                 const audio = new Audio(ding)
                 audio.play()
             }
         }
-    }, [time, type])
+    }, [time, type]) */
 
     useEffect(() => {
         if (currentIndex >= 1) {
@@ -104,12 +67,9 @@ export const Working = ({ workout, handleFinish }) => {
         }
     }, [currentIndex, workoutArray])
 
-    useEffect(() => {
-        setBg(COLOR_TYPE[type])
-    }, [type, setBg])
-
     return (
         <>
+            <Title text={'Aca va el titulo'} type={type} />
             <Clock time={time} type={type} />
             <TimeControls
                 handlePause={() => {

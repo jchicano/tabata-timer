@@ -1,3 +1,4 @@
+import { darken, linearGradient } from 'polished'
 import styled from 'styled-components'
 
 export const AppStyled = styled.section`
@@ -11,7 +12,14 @@ export const AppStyled = styled.section`
 
     font-family: 'Poppins', sans-serif;
 
-    background-color: ${({ background }) => (background ? background : '#fff')};
+    background: ${props =>
+        props.color
+            ? linearGradient({
+                  colorStops: [props.color, darken(0.2, props.color)],
+                  toDirection: 'to bottom left',
+                  fallback: '#fff',
+              })
+            : ''};
 `
 
 export const Division = styled.div`

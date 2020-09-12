@@ -7,8 +7,8 @@ export const TimeSelectorStyled = styled.div`
     display: grid;
     grid-template-columns: 80% 1fr;
 
-    background-color: ${props => (props.color ? props.color : '#3268a8')};
-    border: 3px solid ${props => (props.color ? props.color : '#3268a8')};
+    background-color: ${props => (props.color ? props.color : '')};
+    border: 3px solid ${props => (props.color ? props.color : '')};
 
     color: #fff;
 

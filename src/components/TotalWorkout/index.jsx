@@ -23,7 +23,6 @@ export const TotalWorkout = ({ workout = null, handleStart }) => {
                             text="Preparación"
                             time={workout.preparation}
                             type="prepare"
-                            color="#eb983f"
                         />
                     </div>
                 )}
@@ -37,7 +36,6 @@ export const TotalWorkout = ({ workout = null, handleStart }) => {
                                         <WorkoutItem
                                             text="Ejercicio"
                                             time={workout.work}
-                                            color="#32a852"
                                             type="work"
                                         />
 
@@ -46,13 +44,11 @@ export const TotalWorkout = ({ workout = null, handleStart }) => {
                                                 <WorkoutItem
                                                     text="Descanso largo"
                                                     time={workout.longRest}
-                                                    type="prepare"
-                                                    color="#3268a8"
+                                                    type="longRest"
                                                 />
                                             ) : (
                                                 <WorkoutTitle
                                                     text={'¡Fin!'}
-                                                    color="#db3421"
                                                     type="finish"
                                                 />
                                             )
@@ -60,6 +56,7 @@ export const TotalWorkout = ({ workout = null, handleStart }) => {
                                             <WorkoutItem
                                                 text="Descanso"
                                                 time={workout.rest}
+                                                type="rest"
                                             />
                                         )}
                                     </div>

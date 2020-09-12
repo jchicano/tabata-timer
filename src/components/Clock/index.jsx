@@ -2,7 +2,7 @@ import React from 'react'
 
 import { ClockStyled } from './styles'
 
-import { COLOR_TYPE } from '../../utils/colors'
+import { COLOR_TYPE } from '../../utils/constants'
 
 export const Clock = ({ time, type }) => {
     return (
