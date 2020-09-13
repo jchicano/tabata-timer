@@ -24,15 +24,6 @@ export const TimeSelector = ({ type, handleChange, startValue, name }) => {
             e.preventDefault()
     }
 
-    const handleInputs = e => {
-        /* setWorkout({
-            ...workout,
-            [e.target.name]: Number(e.target.value) || 0,
-        }) */
-
-        console.log('asgdasgdjh')
-    }
-
     return (
         <TimeSelectorStyled color={COLOR_TYPE[type]}>
             <div className="selector-type">

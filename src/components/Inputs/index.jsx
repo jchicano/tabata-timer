@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 
 import { InputContainer } from './styles'
 
@@ -8,11 +8,9 @@ export const InputInteger = ({
     maxValue,
     placeholder,
     name,
-    handleChange,
 }) => {
     const [value, setValue] = useState(initialValue)
     const [intervalState, setIntervalState] = useState(null)
-    const inputEl = useRef(null)
 
     const minus = () => {
         if (value > minValue) {
@@ -60,24 +58,6 @@ export const InputInteger = ({
         clearInterval(intervalState)
     }
 
-    const onChange = e => {
-        console.log('asdasd')
-        if (handleChange) {
-            handleChange(e)
-        }
-    }
-
-    useEffect(() => {
-        /* inputEl.current.dispatchEvent(new Event('change')) */
-        /* if (value < minValue) {
-            setValue(minValue)
-        } else if (value > maxValue) {
-            setValue(maxValue)
-        } */
-
-        console.log(value)
-    }, [value])
-
     return (
         <InputContainer>
             <span
@@ -94,9 +74,7 @@ export const InputInteger = ({
                 max={maxValue}
                 value={value}
                 placeholder={placeholder}
-                onChange={onChange}
                 name={name}
-                ref={inputEl}
             />
             <span
                 className="control right"
@@ -109,3 +87,5 @@ export const InputInteger = ({
         </InputContainer>
     )
 }
+
+export const InputMinutesAndSeconds = () => {}
