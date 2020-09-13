@@ -1,64 +1,41 @@
-import React from 'react'
-import { arrayFromNumber } from '../../utils/utils'
+import React, { useEffect, useState } from 'react'
 
 import { WorkoutItem } from '../WorkoutItem'
-import { Subtitle, WorkoutTitle } from '../Titles'
+import { Subtitle } from '../Titles'
 import { StartButton } from '../Buttons'
 
-import { TotalWorkoutStyled, Workout } from './styles'
+import { TotalWorkoutStyled, Workout, TotalTime } from './styles'
 
-export const TotalWorkout = ({ workout = null, handleStart }) => {
+import { secondsToMinutes } from '../../utils/utils'
+
+export const TotalWorkout = ({ workout = [], handleStart }) => {
+    const [totalTime, setTotalTime] = useState(0)
+
+    useEffect(() => {
+        if (workout.length > 0) {
+            const reducer = (accumulator, currentValue) =>
+                accumulator + currentValue
+
+            const arrayOFtimes = workout.map(x => x.time)
+            setTotalTime(arrayOFtimes.reduce(reducer))
+        }
+    }, [workout])
+
     return (
         <TotalWorkoutStyled>
-            <Subtitle text={'Rutina'} />
+            <TotalTime>
+                <Subtitle text={'Rutina'} />
+                <span> {secondsToMinutes(totalTime)} </span>
+            </TotalTime>
 
             <Workout>
-                {workout?.preparation > 0 && (
-                    <div>
-                        <WorkoutItem
-                            text="Preparación"
-                            time={workout.preparation}
-                            type="prepare"
-                        />
-                    </div>
-                )}
-
-                {arrayFromNumber(workout?.cycles).map((cycle, index) => {
+                {workout.map((item, i) => {
                     return (
-                        <div key={`cycle_${index}`}>
-                            {arrayFromNumber(workout.sets).map((set, i) => {
-                                return (
-                                    <div key={`set_${i}`}>
-                                        <WorkoutItem
-                                            text="Ejercicio"
-                                            time={workout.work}
-                                            type="work"
-                                        />
-
-                                        {i === workout.sets - 1 ? (
-                                            index + 1 < workout.cycles ? (
-                                                <WorkoutItem
-                                                    text="Descanso largo"
-                                                    time={workout.longRest}
-                                                    type="longRest"
-                                                />
-                                            ) : (
-                                                <WorkoutTitle
-                                                    text={'¡Fin!'}
-                                                    type="finish"
-                                                />
-                                            )
-                                        ) : (
-                                            <WorkoutItem
-                                                text="Descanso"
-                                                time={workout.rest}
-                                                type="rest"
-                                            />
-                                        )}
-                                    </div>
-                                )
-                            })}
-                        </div>
+                        <WorkoutItem
+                            type={item.type}
+                            time={item.time}
+                            key={i}
+                        />
                     )
                 })}
             </Workout>

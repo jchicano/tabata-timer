@@ -3,7 +3,6 @@ import React, { useEffect, useState, useContext } from 'react'
 import { Clock } from '../Clock'
 import { TimeControls } from '../TimeControls'
 
-import { createWorkoutArray } from '../../utils/utils'
 import { COLOR_TYPE, TEXTS } from '../../utils/constants'
 import { Timer } from '../../utils/timer'
 import { Title } from '../Titles'
@@ -17,19 +16,12 @@ export const Working = ({ workout }) => {
     const [time, setTime] = useState(workout.preparation)
     const [type, setType] = useState('prepare')
     const [currentIndex, setCurrentIndex] = useState(0)
-    const [workoutArray, setWorkoutArray] = useState([])
     const { setBg, setRunning } = useContext(AppContext)
     const [timerState, setTimerState] = useState(new Timer())
-
-    //Crea el array del workout a partir del objeto workout de las props
-    useEffect(() => {
-        setWorkoutArray(createWorkoutArray(workout))
-    }, [workout])
 
     //timer
     useEffect(() => {
         const t = new Timer(() => {
-            console.log('time', time)
             if (time > 1) {
                 setTime(time - 1)
             }
@@ -42,7 +34,7 @@ export const Working = ({ workout }) => {
         setTimerState(t)
 
         return () => t.stop()
-    }, [time, workoutArray, currentIndex])
+    }, [time, workout, currentIndex])
 
     //audios
     useEffect(() => {
@@ -60,19 +52,15 @@ export const Working = ({ workout }) => {
         setBg(COLOR_TYPE[type])
     }, [type, setBg])
 
-    //pasar al siguiente elemento del workoutArray
+    //pasar al siguiente elemento del workout
     useEffect(() => {
-        console.log('index', currentIndex)
-        console.log('item', workoutArray[currentIndex])
-        if (currentIndex > 0) {
-            setTime(workoutArray[currentIndex]?.time)
-            setType(workoutArray[currentIndex]?.type)
-        }
-    }, [currentIndex, workoutArray])
+        setTime(workout[currentIndex]?.time)
+        setType(workout[currentIndex]?.type)
+    }, [currentIndex, workout])
 
     const restartWorkout = () => {
         timerState.pause()
-        setTime(workoutArray[0].time)
+        setTime(workout[0].time)
         setCurrentIndex(0)
         setType('prepare')
     }

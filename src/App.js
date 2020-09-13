@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Title } from './components/Titles'
 import { WorkoutCreator } from './components/WorkoutCreator'
@@ -8,6 +8,7 @@ import { Working } from './components/Working'
 import { COLOR_TYPE } from './utils/constants'
 
 import { AppStyled, Division } from './styles'
+import { createWorkoutArray } from './utils/utils'
 
 export const AppContext = React.createContext({})
 
@@ -22,6 +23,7 @@ function App() {
         sets: 2,
         longRest: 1,
     })
+    const [workoutArray, setWorkoutArray] = useState([])
 
     const handleInputs = e => {
         setWorkout({
@@ -31,20 +33,22 @@ function App() {
     }
 
     const startWorkout = () => {
-        /* if (workout.work <= 0 || workout.cycles <= 0 || workout.sets <= 0) {
-            alert('Ingrese tiempos validos')
-            return
-        } */
+        /* const array = createWorkoutArray(workout)
+        setWorkoutArray(array) */
 
         setRunning(true)
     }
+
+    useEffect(() => {
+        setWorkoutArray(createWorkoutArray(workout))
+    }, [workout])
 
     return (
         <AppContext.Provider value={{ setBg, setRunning }}>
             <AppStyled color={bg}>
                 {running ? (
                     <>
-                        <Working workout={workout} />
+                        <Working workout={workoutArray} />
                     </>
                 ) : (
                     <>
@@ -55,7 +59,7 @@ function App() {
                                 workout={workout}
                             />
                             <TotalWorkout
-                                workout={workout}
+                                workout={workoutArray}
                                 handleStart={startWorkout}
                             />
                         </Division>

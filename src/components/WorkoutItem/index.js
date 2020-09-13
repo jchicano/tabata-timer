@@ -2,11 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { secondsToMinutes } from '../../utils/utils'
-import { COLOR_TYPE } from '../../utils/constants'
+import { COLOR_TYPE, TEXTS } from '../../utils/constants'
 
 const WorkoutItemStyled = styled.div`
     width: 100%;
-    height: 80px;
+    min-height: 40px;
+    height: 40px;
     padding: 0.5rem 1rem;
     margin-bottom: 1rem;
 
@@ -19,10 +20,10 @@ const WorkoutItemStyled = styled.div`
     justify-content: space-between;
 `
 
-export const WorkoutItem = ({ text, time, type }) => {
+export const WorkoutItem = ({ text = null, time, type }) => {
     return (
         <WorkoutItemStyled color={COLOR_TYPE[type]}>
-            <h5>{text}</h5>
+            <h5>{text || TEXTS[type]}</h5>
             <span>{secondsToMinutes(time)}</span>
         </WorkoutItemStyled>
     )

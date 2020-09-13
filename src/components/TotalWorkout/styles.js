@@ -49,3 +49,17 @@ export const Workout = styled.div`
         width: 100%;
     }
 `
+
+export const TotalTime = styled.div`
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    span {
+        font-size: 24px;
+        line-height: 24px;
+        font-weight: bold;
+    }
+`
