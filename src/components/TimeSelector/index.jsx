@@ -3,6 +3,8 @@ import React from 'react'
 import { TimeSelectorStyled, Icon } from './styles'
 import { ICONS, TEXTS, COLOR_TYPE } from '../../utils/constants'
 
+import { InputInteger } from '../Inputs/index'
+
 export const TimeSelector = ({ type, handleChange, startValue, name }) => {
     const validateInput = e => {
         const isNumber = !(e.keyCode < 48 || e.keyCode > 57)
@@ -18,6 +20,14 @@ export const TimeSelector = ({ type, handleChange, startValue, name }) => {
             e.preventDefault()
     }
 
+    const onInputChange = e => {
+        if (handleChange) {
+            handleChange(e)
+        }
+
+        alert('cambio')
+    }
+
     return (
         <TimeSelectorStyled color={COLOR_TYPE[type]}>
             <div className="selector-type">
@@ -25,15 +35,20 @@ export const TimeSelector = ({ type, handleChange, startValue, name }) => {
                 <span>{TEXTS[type] || ''}</span>
             </div>
             <div className="selector-time">
-                <input
-                    type="text"
-                    placeholder="0"
-                    maxLength="4"
-                    onChange={handleChange}
-                    onKeyDown={validateInput}
-                    defaultValue={startValue}
-                    name={name}
-                />
+                {type === 'sets' || type === 'cycles' ? (
+                    <InputInteger minValue={1} maxValue={50} initialValue={1} />
+                ) : (
+                    <input
+                        type="text"
+                        placeholder="0"
+                        maxLength="4"
+                        onChange={onInputChange}
+                        onKeyDown={validateInput}
+                        defaultValue={startValue}
+                        name={name}
+                        autoComplete="off"
+                    />
+                )}
             </div>
         </TimeSelectorStyled>
     )
