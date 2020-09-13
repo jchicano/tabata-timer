@@ -29,9 +29,12 @@ export const Working = ({ workout }) => {
     //timer
     useEffect(() => {
         const t = new Timer(() => {
-            if (time > 0) {
+            console.log('time', time)
+            if (time > 1) {
                 setTime(time - 1)
-            } else {
+            }
+
+            if (time === 1) {
                 setCurrentIndex(prevIndex => prevIndex + 1)
             }
         }, 1000)
@@ -39,14 +42,14 @@ export const Working = ({ workout }) => {
         setTimerState(t)
 
         return () => t.stop()
-    }, [time])
+    }, [time, workoutArray, currentIndex])
 
     //audios
     useEffect(() => {
-        if (time > 0 && time <= 3) {
+        if (time > 1 && time <= 5) {
             const audio = new Audio(tick)
             audio.play()
-        } else if (time === 0) {
+        } else if (time === 1) {
             const audio = new Audio(ding)
             audio.play()
         }
@@ -59,9 +62,11 @@ export const Working = ({ workout }) => {
 
     //pasar al siguiente elemento del workoutArray
     useEffect(() => {
+        console.log('index', currentIndex)
+        console.log('item', workoutArray[currentIndex])
         if (currentIndex > 0) {
-            setTime(workoutArray[currentIndex].time)
-            setType(workoutArray[currentIndex].type)
+            setTime(workoutArray[currentIndex]?.time)
+            setType(workoutArray[currentIndex]?.type)
         }
     }, [currentIndex, workoutArray])
 
