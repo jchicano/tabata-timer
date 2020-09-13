@@ -5,7 +5,7 @@ export const TimeSelectorStyled = styled.div`
     padding: 1rem;
 
     display: grid;
-    grid-template-columns: 80% 1fr;
+    grid-template-columns: 85% 1fr;
 
     background-color: ${props => (props.color ? props.color : '')};
     border: 3px solid ${props => (props.color ? props.color : '')};

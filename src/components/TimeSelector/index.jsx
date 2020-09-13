@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { TimeSelectorStyled, Icon } from './styles'
 import { ICONS, TEXTS, COLOR_TYPE } from '../../utils/constants'
 
+import { AppContext } from '../../App'
+
 import { InputInteger } from '../Inputs/index'
 
 export const TimeSelector = ({ type, handleChange, startValue, name }) => {
+    const { setWorkout, workout } = useContext(AppContext)
+
     const validateInput = e => {
         const isNumber = !(e.keyCode < 48 || e.keyCode > 57)
         const isNumberPad = !(e.keyCode < 96 || e.keyCode > 105)
@@ -20,12 +24,13 @@ export const TimeSelector = ({ type, handleChange, startValue, name }) => {
             e.preventDefault()
     }
 
-    const onInputChange = e => {
-        if (handleChange) {
-            handleChange(e)
-        }
+    const handleInputs = e => {
+        /* setWorkout({
+            ...workout,
+            [e.target.name]: Number(e.target.value) || 0,
+        }) */
 
-        alert('cambio')
+        console.log('asgdasgdjh')
     }
 
     return (
@@ -36,13 +41,18 @@ export const TimeSelector = ({ type, handleChange, startValue, name }) => {
             </div>
             <div className="selector-time">
                 {type === 'sets' || type === 'cycles' ? (
-                    <InputInteger minValue={1} maxValue={50} initialValue={1} />
+                    <InputInteger
+                        minValue={1}
+                        maxValue={5}
+                        initialValue={1}
+                        handleChange={handleInputs}
+                    />
                 ) : (
                     <input
                         type="text"
                         placeholder="0"
                         maxLength="4"
-                        onChange={onInputChange}
+                        onChange={handleInputs}
                         onKeyDown={validateInput}
                         defaultValue={startValue}
                         name={name}
