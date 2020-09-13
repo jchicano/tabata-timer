@@ -19,8 +19,8 @@ function App() {
         preparation: 1,
         work: 1,
         rest: 1,
-        cycles: 2,
-        sets: 2,
+        cycles: 1,
+        sets: 1,
         longRest: 1,
     })
     const [workoutArray, setWorkoutArray] = useState([])

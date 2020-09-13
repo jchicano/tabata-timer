@@ -24,6 +24,13 @@ export const TimeSelector = ({ type, handleChange, startValue, name }) => {
             e.preventDefault()
     }
 
+    const onChange = (name, value) => {
+        setWorkout({
+            ...workout,
+            [name]: value,
+        })
+    }
+
     return (
         <TimeSelectorStyled color={COLOR_TYPE[type]}>
             <div className="selector-type">
@@ -34,16 +41,17 @@ export const TimeSelector = ({ type, handleChange, startValue, name }) => {
                 {type === 'sets' || type === 'cycles' ? (
                     <InputInteger
                         minValue={1}
-                        maxValue={5}
+                        maxValue={50}
                         initialValue={1}
-                        handleChange={handleInputs}
+                        handleChange={onChange}
+                        name={type}
                     />
                 ) : (
                     <input
                         type="text"
                         placeholder="0"
                         maxLength="4"
-                        onChange={handleInputs}
+                        onChange={onChange}
                         onKeyDown={validateInput}
                         defaultValue={startValue}
                         name={name}

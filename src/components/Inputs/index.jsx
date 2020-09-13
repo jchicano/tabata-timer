@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { InputContainer } from './styles'
 
@@ -8,6 +8,7 @@ export const InputInteger = ({
     maxValue,
     placeholder,
     name,
+    handleChange,
 }) => {
     const [value, setValue] = useState(initialValue)
     const [intervalState, setIntervalState] = useState(null)
@@ -58,6 +59,14 @@ export const InputInteger = ({
         clearInterval(intervalState)
     }
 
+    const onChange = () => {
+        if (handleChange) {
+            handleChange(name, value)
+        }
+    }
+
+    useEffect(onChange, [value])
+
     return (
         <InputContainer>
             <span
@@ -75,6 +84,7 @@ export const InputInteger = ({
                 value={value}
                 placeholder={placeholder}
                 name={name}
+                readOnly
             />
             <span
                 className="control right"
