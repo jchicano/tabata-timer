@@ -164,7 +164,7 @@ export const InputTime = ({
     }
 
     return (
-        <InputContainer type="time">
+        <InputContainer>
             <input
                 type="text"
                 maxLength="5"
