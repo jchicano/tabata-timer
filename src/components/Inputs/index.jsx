@@ -110,7 +110,7 @@ export const InputTime = ({
     const [value, setValue] = useState(INITIAL_TIME_VALUE)
 
     const validateInput = e => {
-        /* const isNumber = !(e.keyCode < 48 || e.keyCode > 57)
+        const isNumber = !(e.keyCode < 48 || e.keyCode > 57)
         const isNumberPad = !(e.keyCode < 96 || e.keyCode > 105)
         const isSpecialChar =
             e.keyCode === 8 || e.keyCode === 9 || e.keyCode === 46
@@ -120,7 +120,7 @@ export const InputTime = ({
             !isSpecialChar &&
             !isNumberPad &&
             !isArrow &&
-            e.preventDefault() */
+            e.preventDefault()
     }
 
     const onChange = e => {
@@ -142,12 +142,11 @@ export const InputTime = ({
         setValue(elValue)
     }
 
-    const onBlur = () => {
-        let newValue = null
+    const onBlur = e => {
         if (value.length === 0) {
-            newValue = -INITIAL_TIME_VALUE
-        } else if (value.length < 5) {
-            newValue = value.padStart('5', '00:')
+            setValue(INITIAL_TIME_VALUE)
+        } else if (value.length <= 5) {
+            let newValue = value.padStart('5', '00:')
 
             //correccion de segundos > 60
             const mins = newValue[0] + newValue[1]
@@ -160,9 +159,8 @@ export const InputTime = ({
 
                 newValue = secondsToMinutes(newSecs)
             }
+            setValue(newValue)
         }
-
-        setValue(newValue)
     }
 
     return (
