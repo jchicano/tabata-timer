@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 
 import { TimeSelectorStyled, Icon } from './styles'
 import { ICONS, TEXTS, COLOR_TYPE } from '../../utils/constants'
@@ -7,7 +7,7 @@ import { AppContext } from '../../App'
 
 import { InputInteger, InputTime } from '../Inputs/index'
 
-export const TimeSelector = ({ type, handleChange, startValue, name }) => {
+export const TimeSelector = ({ type, startValue, name }) => {
     const { setWorkout, workout } = useContext(AppContext)
 
     const onChange = (name, value) => {
@@ -16,6 +16,10 @@ export const TimeSelector = ({ type, handleChange, startValue, name }) => {
             [name]: value,
         })
     }
+
+    useEffect(() => {
+        console.log(workout)
+    }, [workout])
 
     return (
         <TimeSelectorStyled color={COLOR_TYPE[type]}>
@@ -36,9 +40,9 @@ export const TimeSelector = ({ type, handleChange, startValue, name }) => {
                     <InputTime
                         type="text"
                         placeholder="0"
-                        onChange={onChange}
-                        defaultValue={startValue}
-                        name={name}
+                        handleChange={onChange}
+                        initialValue={startValue}
+                        name={type}
                     />
                 )}
             </div>

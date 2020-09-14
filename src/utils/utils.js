@@ -7,6 +7,31 @@ export const secondsToMinutes = seconds => {
         .padStart(2, '0')}:${newSeconds.toString().padStart(2, '0')}`
 }
 
+export const formatedToSeconds = formatedTime => {
+    const string = formatedTime.replace(':', '')
+
+    let seconds, mins, time
+    switch (string.length) {
+        case 1:
+        case 2:
+            return Number(string)
+        case 3:
+            mins = Number(String(string).substr(0, 1))
+            seconds = Number(String(string).substr(1, 2))
+
+            time = mins * 60 + seconds
+            return time
+        case 4:
+            mins = Number(String(string).substr(0, 2))
+            seconds = Number(String(string).substr(2, 2))
+
+            time = mins * 60 + seconds
+            return time
+        default:
+            return 0
+    }
+}
+
 export const arrayFromNumber = number => {
     let array = []
     for (let i = 1; i <= number; i++) {
@@ -19,7 +44,7 @@ export const arrayFromNumber = number => {
 export const createWorkoutArray = workout => {
     const fakeArray = [
         {
-            type: 'prepare',
+            type: 'preparation',
             time: workout.preparation,
         },
     ]

@@ -21,11 +21,6 @@ export const InputContainer = styled.div`
         text-align: center;
     }
 
-    input:read-only {
-        user-select: none;
-        pointer-events: none;
-    }
-
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
         -webkit-appearance: none;

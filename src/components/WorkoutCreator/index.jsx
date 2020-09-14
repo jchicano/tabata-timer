@@ -12,7 +12,7 @@ export const WorkoutCreator = () => {
     return (
         <Selectors>
             <TimeSelector
-                type="prepare"
+                type="preparation"
                 startValue={workout.preparation}
                 name="preparation"
             />

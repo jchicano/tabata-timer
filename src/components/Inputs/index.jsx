@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { secondsToMinutes } from '../../utils/utils'
+import { formatedToSeconds, secondsToMinutes } from '../../utils/utils'
 
 import { InputContainer } from './styles'
-
-const INITIAL_TIME_VALUE = '00:00'
 
 export const InputInteger = ({
     initialValue,
@@ -86,6 +84,8 @@ export const InputInteger = ({
                 placeholder={placeholder}
                 name={name}
                 readOnly
+                disabled={true}
+                className="integer"
             />
             <span
                 className="control right"
@@ -101,12 +101,12 @@ export const InputInteger = ({
 
 export const InputTime = ({
     initialValue,
-    minValue,
-    maxValue,
     placeholder,
     name,
     handleChange,
 }) => {
+    const INITIAL_TIME_VALUE = secondsToMinutes(initialValue) || '00:00'
+
     const [value, setValue] = useState(INITIAL_TIME_VALUE)
 
     const validateInput = e => {
@@ -125,6 +125,12 @@ export const InputTime = ({
 
     const onChange = e => {
         let elValue = e.target.value
+
+        if (handleChange) {
+            const secs = formatedToSeconds(e.target.value)
+            console.log(secs)
+            handleChange(e.target.name, secs)
+        }
 
         elValue = elValue.replace(':', '')
         if (elValue.length === 3) {
@@ -168,10 +174,12 @@ export const InputTime = ({
             <input
                 type="text"
                 maxLength="5"
-                onKeyDown={validateInput}
-                value={value || ''}
-                onChange={onChange}
                 className="time"
+                name={name}
+                placeholder={placeholder}
+                value={value || ''}
+                onKeyDown={validateInput}
+                onChange={onChange}
                 onBlur={onBlur}
             />
         </InputContainer>
