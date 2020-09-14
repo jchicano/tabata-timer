@@ -5,24 +5,10 @@ import { ICONS, TEXTS, COLOR_TYPE } from '../../utils/constants'
 
 import { AppContext } from '../../App'
 
-import { InputInteger } from '../Inputs/index'
+import { InputInteger, InputTime } from '../Inputs/index'
 
 export const TimeSelector = ({ type, handleChange, startValue, name }) => {
     const { setWorkout, workout } = useContext(AppContext)
-
-    const validateInput = e => {
-        const isNumber = !(e.keyCode < 48 || e.keyCode > 57)
-        const isNumberPad = !(e.keyCode < 96 || e.keyCode > 105)
-        const isSpecialChar =
-            e.keyCode === 8 || e.keyCode === 9 || e.keyCode === 46
-        const isArrow = !(e.keyCode < 37 || e.keyCode > 40)
-
-        !isNumber &&
-            !isSpecialChar &&
-            !isNumberPad &&
-            !isArrow &&
-            e.preventDefault()
-    }
 
     const onChange = (name, value) => {
         setWorkout({
@@ -47,15 +33,12 @@ export const TimeSelector = ({ type, handleChange, startValue, name }) => {
                         name={type}
                     />
                 ) : (
-                    <input
+                    <InputTime
                         type="text"
                         placeholder="0"
-                        maxLength="4"
                         onChange={onChange}
-                        onKeyDown={validateInput}
                         defaultValue={startValue}
                         name={name}
-                        autoComplete="off"
                     />
                 )}
             </div>

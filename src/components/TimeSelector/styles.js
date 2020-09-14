@@ -32,21 +32,6 @@ export const TimeSelectorStyled = styled.div`
 
         display: flex;
         justify-content: flex-end;
-
-        input {
-            width: 100%;
-            height: 100%;
-            padding: 0.5rem 1rem;
-
-            font-size: 28px;
-            line-height: 28px;
-
-            border: none;
-            border-radius: 6px;
-            background: rgba(255, 255, 255, 1);
-
-            text-align: center;
-        }
     }
 `
 

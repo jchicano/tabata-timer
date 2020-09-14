@@ -1,14 +1,27 @@
 import styled from 'styled-components'
 
 export const InputContainer = styled.div`
-    width: 100%;
     height: 100%;
-
     position: relative;
 
-    border-radius: 6px;
+    display: flex;
 
     input {
+        width: 100%;
+        height: 100%;
+        padding: 0.5rem 1rem;
+
+        font-size: 28px;
+        line-height: 28px;
+
+        border: none;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 1);
+
+        text-align: center;
+    }
+
+    input:read-only {
         user-select: none;
         pointer-events: none;
     }

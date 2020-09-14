@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { secondsToMinutes } from '../../utils/utils'
 
 import { InputContainer } from './styles'
+
+const INITIAL_TIME_VALUE = '00:00'
 
 export const InputInteger = ({
     initialValue,
@@ -79,8 +82,6 @@ export const InputInteger = ({
             </span>
             <input
                 type="number"
-                min={minValue}
-                max={maxValue}
                 value={value}
                 placeholder={placeholder}
                 name={name}
@@ -98,4 +99,83 @@ export const InputInteger = ({
     )
 }
 
-export const InputMinutesAndSeconds = () => {}
+export const InputTime = ({
+    initialValue,
+    minValue,
+    maxValue,
+    placeholder,
+    name,
+    handleChange,
+}) => {
+    const [value, setValue] = useState(INITIAL_TIME_VALUE)
+
+    const validateInput = e => {
+        /* const isNumber = !(e.keyCode < 48 || e.keyCode > 57)
+        const isNumberPad = !(e.keyCode < 96 || e.keyCode > 105)
+        const isSpecialChar =
+            e.keyCode === 8 || e.keyCode === 9 || e.keyCode === 46
+        const isArrow = !(e.keyCode < 37 || e.keyCode > 40)
+
+        !isNumber &&
+            !isSpecialChar &&
+            !isNumberPad &&
+            !isArrow &&
+            e.preventDefault() */
+    }
+
+    const onChange = e => {
+        let elValue = e.target.value
+
+        elValue = elValue.replace(':', '')
+        if (elValue.length === 3) {
+            const a = String(elValue).substr(0, 1)
+            const b = String(elValue).substr(1, 2)
+
+            elValue = `${a}:${b}`
+        } else if (elValue.length === 4) {
+            const a = String(elValue).substr(0, 2)
+            const b = String(elValue).substr(2, 2)
+
+            elValue = `${a}:${b}`
+        }
+
+        setValue(elValue)
+    }
+
+    const onBlur = () => {
+        let newValue = null
+        if (value.length === 0) {
+            newValue = -INITIAL_TIME_VALUE
+        } else if (value.length < 5) {
+            newValue = value.padStart('5', '00:')
+
+            //correccion de segundos > 60
+            const mins = newValue[0] + newValue[1]
+            const secs =
+                newValue[newValue.length - 2] + newValue[newValue.length - 1]
+
+            if (secs >= 60) {
+                const minsInSecs = mins * 60
+                const newSecs = Number(secs) + Number(minsInSecs)
+
+                newValue = secondsToMinutes(newSecs)
+            }
+        }
+
+        setValue(newValue)
+    }
+
+    return (
+        <InputContainer type="time">
+            <input
+                type="text"
+                maxLength="5"
+                onKeyDown={validateInput}
+                value={value || ''}
+                onChange={onChange}
+                className="time"
+                onBlur={onBlur}
+            />
+        </InputContainer>
+    )
+}

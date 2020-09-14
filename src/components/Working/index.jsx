@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 
 import { Clock } from '../Clock'
-import { TimeControls } from '../TimeControls'
+import { TimeControls } from '../TimeControl'
 
 import { COLOR_TYPE, TEXTS } from '../../utils/constants'
 import { Timer } from '../../utils/timer'
