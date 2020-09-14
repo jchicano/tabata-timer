@@ -1,22 +1,25 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 
 import { TimeSelectorStyled, Icon } from './styles'
 import { ICONS, TEXTS, COLOR_TYPE } from '../../utils/constants'
 
-export const TimeSelector = ({ type, handleChange, startValue, name }) => {
-    const validateInput = e => {
-        const isNumber = !(e.keyCode < 48 || e.keyCode > 57)
-        const isNumberPad = !(e.keyCode < 96 || e.keyCode > 105)
-        const isSpecialChar =
-            e.keyCode === 8 || e.keyCode === 9 || e.keyCode === 46
-        const isArrow = !(e.keyCode < 37 || e.keyCode > 40)
+import { AppContext } from '../../App'
 
-        !isNumber &&
-            !isSpecialChar &&
-            !isNumberPad &&
-            !isArrow &&
-            e.preventDefault()
+import { InputInteger, InputTime } from '../Inputs/index'
+
+export const TimeSelector = ({ type, startValue, name }) => {
+    const { setWorkout, workout } = useContext(AppContext)
+
+    const onChange = (name, value) => {
+        setWorkout({
+            ...workout,
+            [name]: value,
+        })
     }
+
+    useEffect(() => {
+        console.log(workout)
+    }, [workout])
 
     return (
         <TimeSelectorStyled color={COLOR_TYPE[type]}>
@@ -25,15 +28,23 @@ export const TimeSelector = ({ type, handleChange, startValue, name }) => {
                 <span>{TEXTS[type] || ''}</span>
             </div>
             <div className="selector-time">
-                <input
-                    type="text"
-                    placeholder="0"
-                    maxLength="4"
-                    onChange={handleChange}
-                    onKeyDown={validateInput}
-                    defaultValue={startValue}
-                    name={name}
-                />
+                {type === 'sets' || type === 'cycles' ? (
+                    <InputInteger
+                        minValue={1}
+                        maxValue={50}
+                        initialValue={1}
+                        handleChange={onChange}
+                        name={type}
+                    />
+                ) : (
+                    <InputTime
+                        type="text"
+                        placeholder="0"
+                        handleChange={onChange}
+                        initialValue={startValue}
+                        name={type}
+                    />
+                )}
             </div>
         </TimeSelectorStyled>
     )

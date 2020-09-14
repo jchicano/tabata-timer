@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 
 import { Clock } from '../Clock'
-import { TimeControls } from '../TimeControls'
+import { TimeControls } from '../TimeControl'
 
 import { COLOR_TYPE, TEXTS } from '../../utils/constants'
 import { Timer } from '../../utils/timer'
@@ -14,7 +14,7 @@ import ding from '../../assets/sounds/ding.mp3'
 
 export const Working = ({ workout }) => {
     const [time, setTime] = useState(workout.preparation)
-    const [type, setType] = useState('prepare')
+    const [type, setType] = useState('preparation')
     const [currentIndex, setCurrentIndex] = useState(0)
     const { setBg, setRunning } = useContext(AppContext)
     const [timerState, setTimerState] = useState(new Timer())
@@ -62,7 +62,7 @@ export const Working = ({ workout }) => {
         timerState.pause()
         setTime(workout[0].time)
         setCurrentIndex(0)
-        setType('prepare')
+        setType('preparation')
     }
 
     const stopWorkout = () => {

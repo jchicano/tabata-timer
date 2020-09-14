@@ -19,18 +19,11 @@ function App() {
         preparation: 1,
         work: 1,
         rest: 1,
-        cycles: 2,
-        sets: 2,
+        cycles: 1,
+        sets: 1,
         longRest: 1,
     })
     const [workoutArray, setWorkoutArray] = useState([])
-
-    const handleInputs = e => {
-        setWorkout({
-            ...workout,
-            [e.target.name]: Number(e.target.value) || 0,
-        })
-    }
 
     const startWorkout = () => {
         /* const array = createWorkoutArray(workout)
@@ -44,7 +37,7 @@ function App() {
     }, [workout])
 
     return (
-        <AppContext.Provider value={{ setBg, setRunning }}>
+        <AppContext.Provider value={{ setBg, setRunning, workout, setWorkout }}>
             <AppStyled color={bg}>
                 {running ? (
                     <>
@@ -54,10 +47,7 @@ function App() {
                     <>
                         <Title text={'Tabata Timer'} />
                         <Division>
-                            <WorkoutCreator
-                                handleInputs={handleInputs}
-                                workout={workout}
-                            />
+                            <WorkoutCreator />
                             <TotalWorkout
                                 workout={workoutArray}
                                 handleStart={startWorkout}
