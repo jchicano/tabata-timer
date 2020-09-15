@@ -42,12 +42,13 @@ export const arrayFromNumber = number => {
 }
 
 export const createWorkoutArray = workout => {
-    const fakeArray = [
-        {
+    const fakeArray = []
+    if (workout.preparation > 0) {
+        fakeArray.push({
             type: 'preparation',
             time: workout.preparation,
-        },
-    ]
+        })
+    }
 
     arrayFromNumber(workout.cycles).forEach((cycle, indexCycle) => {
         arrayFromNumber(workout.sets).forEach((set, indexSet) => {
