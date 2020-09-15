@@ -90,6 +90,19 @@ export const createWorkoutArray = workout => {
     return fakeArray
 }
 
+export const getTotalTimeFromWorkoutArray = workout => {
+    if (workout.length > 0) {
+        const reducer = (accumulator, currentValue) =>
+            accumulator + currentValue
+
+        const arrayOFtimes = workout.map(x => x.time)
+
+        return arrayOFtimes.reduce(reducer)
+    }
+
+    return 0
+}
+
 export function setCaretPosition(elem, caretPos) {
     if (elem != null) {
         if (elem.createTextRange) {
