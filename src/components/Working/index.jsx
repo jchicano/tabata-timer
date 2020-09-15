@@ -128,6 +128,7 @@ export const Working = ({ workout }) => {
             <WorkoutSequence
                 workoutArray={workout}
                 currentIndex={currentIndex}
+                currentType={workout[currentIndex].type}
                 sets={currentSet}
                 totalSets={workoutObject.sets}
                 cycles={currentCycle}

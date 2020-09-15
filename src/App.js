@@ -14,7 +14,7 @@ export const AppContext = React.createContext({})
 
 function App() {
     const [bg, setBg] = useState(COLOR_TYPE['initial'])
-    const [running, setRunning] = useState(true)
+    const [running, setRunning] = useState(false)
     const [workout, setWorkout] = useState({
         preparation: 3,
         work: 5,

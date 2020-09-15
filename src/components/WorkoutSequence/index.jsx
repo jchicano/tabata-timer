@@ -11,15 +11,14 @@ import {
 
 export const WorkoutSequence = ({
     workoutArray,
-    currentIndex,
+    currentIndex = 0,
+    currentType = null,
     sets = 0,
     totalSets = 0,
     cycles = 0,
     totalCycles = 0,
     remaining = 0,
 }) => {
-    const [currentType, setCurrentType] = useState(null)
-
     const list = useRef(null)
 
     const nextSequenceItem = () => {
@@ -27,18 +26,10 @@ export const WorkoutSequence = ({
         const currentPosition = list.current.scrollTop
         const itemHeigth = list.current.children[0]?.clientHeight
 
-        seq.scroll(0, currentPosition + itemHeigth)
-
-        /* const pastItem = seq.children[0]
-        pastItem && pastItem.classList.add('current') */
-    }
-
-    //borrar despues, no es necesario en prod
-    useEffect(() => {
-        if (workoutArray[currentIndex]) {
-            setCurrentType(workoutArray[currentIndex].type)
+        if (currentIndex > 0) {
+            seq.scroll(0, currentPosition + itemHeigth)
         }
-    }, [currentIndex, workoutArray])
+    }
 
     useEffect(nextSequenceItem, [currentIndex])
 
