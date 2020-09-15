@@ -7,27 +7,46 @@ import { Selectors } from './styles'
 import { AppContext } from '../../App'
 
 export const WorkoutCreator = () => {
-    const { workout } = useContext(AppContext)
+    const { setWorkout, workout } = useContext(AppContext)
+
+    const onChange = (name, value) => {
+        setWorkout({
+            ...workout,
+            [name]: value,
+        })
+    }
 
     return (
         <Selectors>
             <TimeSelector
                 type="preparation"
                 startValue={workout.preparation}
-                name="preparation"
+                handleChange={onChange}
             />
-            <TimeSelector type="work" name="work" startValue={workout.work} />
-            <TimeSelector type="rest" name="rest" startValue={workout.rest} />
-            <TimeSelector type="sets" startValue={workout.sets} name="sets" />
+            <TimeSelector
+                type="work"
+                startValue={workout.work}
+                handleChange={onChange}
+            />
+            <TimeSelector
+                type="rest"
+                startValue={workout.rest}
+                handleChange={onChange}
+            />
+            <TimeSelector
+                type="sets"
+                startValue={workout.sets}
+                handleChange={onChange}
+            />
             <TimeSelector
                 type="longRest"
-                name="longRest"
                 startValue={workout.longRest}
+                handleChange={onChange}
             />
             <TimeSelector
                 type="cycles"
                 startValue={workout.cycles}
-                name="cycles"
+                handleChange={onChange}
             />
         </Selectors>
     )

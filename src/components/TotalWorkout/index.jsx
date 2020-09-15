@@ -6,18 +6,18 @@ import { StartButton } from '../Buttons'
 
 import { TotalWorkoutStyled, Workout, TotalTime } from './styles'
 
-import { secondsToMinutes } from '../../utils/utils'
+import {
+    secondsToMinutes,
+    getTotalTimeFromWorkoutArray,
+} from '../../utils/utils'
 
 export const TotalWorkout = ({ workout = [], handleStart }) => {
     const [totalTime, setTotalTime] = useState(0)
 
     useEffect(() => {
         if (workout.length > 0) {
-            const reducer = (accumulator, currentValue) =>
-                accumulator + currentValue
-
-            const arrayOFtimes = workout.map(x => x.time)
-            setTotalTime(arrayOFtimes.reduce(reducer))
+            const time = getTotalTimeFromWorkoutArray(workout)
+            setTotalTime(time)
         }
     }, [workout])
 

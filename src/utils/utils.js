@@ -42,12 +42,13 @@ export const arrayFromNumber = number => {
 }
 
 export const createWorkoutArray = workout => {
-    const fakeArray = [
-        {
+    const fakeArray = []
+    if (workout.preparation > 0) {
+        fakeArray.push({
             type: 'preparation',
             time: workout.preparation,
-        },
-    ]
+        })
+    }
 
     arrayFromNumber(workout.cycles).forEach((cycle, indexCycle) => {
         arrayFromNumber(workout.sets).forEach((set, indexSet) => {
@@ -87,6 +88,19 @@ export const createWorkoutArray = workout => {
     })
 
     return fakeArray
+}
+
+export const getTotalTimeFromWorkoutArray = workout => {
+    if (workout.length > 0) {
+        const reducer = (accumulator, currentValue) =>
+            accumulator + currentValue
+
+        const arrayOFtimes = workout.map(x => x.time)
+
+        return arrayOFtimes.reduce(reducer)
+    }
+
+    return 0
 }
 
 export function setCaretPosition(elem, caretPos) {

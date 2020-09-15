@@ -11,7 +11,8 @@ export const InputInteger = ({
     name,
     handleChange,
 }) => {
-    const [value, setValue] = useState(initialValue)
+    const INITIAL_VALUE = initialValue || 1
+    const [value, setValue] = useState(INITIAL_VALUE)
     const [intervalState, setIntervalState] = useState(null)
 
     const minus = () => {
@@ -80,7 +81,7 @@ export const InputInteger = ({
             </span>
             <input
                 type="number"
-                value={value}
+                value={value || ''}
                 placeholder={placeholder}
                 name={name}
                 readOnly
@@ -128,7 +129,6 @@ export const InputTime = ({
 
         if (handleChange) {
             const secs = formatedToSeconds(e.target.value)
-            console.log(secs)
             handleChange(e.target.name, secs)
         }
 

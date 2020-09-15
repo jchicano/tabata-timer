@@ -16,12 +16,12 @@ function App() {
     const [bg, setBg] = useState(COLOR_TYPE['initial'])
     const [running, setRunning] = useState(false)
     const [workout, setWorkout] = useState({
-        preparation: 1,
-        work: 1,
+        preparation: 3,
+        work: 5,
         rest: 1,
-        cycles: 1,
-        sets: 1,
-        longRest: 1,
+        cycles: 3,
+        sets: 5,
+        longRest: 2,
     })
     const [workoutArray, setWorkoutArray] = useState([])
 

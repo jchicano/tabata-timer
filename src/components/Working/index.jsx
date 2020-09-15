@@ -2,22 +2,31 @@ import React, { useEffect, useState, useContext } from 'react'
 
 import { Clock } from '../Clock'
 import { TimeControls } from '../TimeControl'
-
-import { COLOR_TYPE, TEXTS } from '../../utils/constants'
-import { Timer } from '../../utils/timer'
 import { Title } from '../Titles'
+import { WorkoutSequence } from '../WorkoutSequence'
+import { WorkingContainer } from './styles'
 
 import { AppContext } from '../../App'
 
 import tick from '../../assets/sounds/tick.mp3'
 import ding from '../../assets/sounds/ding.mp3'
 
+import { Timer } from '../../utils/timer'
+import { COLOR_TYPE, TEXTS } from '../../utils/constants'
+import { getTotalTimeFromWorkoutArray } from '../../utils/utils'
+
 export const Working = ({ workout }) => {
     const [time, setTime] = useState(workout.preparation)
     const [type, setType] = useState('preparation')
     const [currentIndex, setCurrentIndex] = useState(0)
-    const { setBg, setRunning } = useContext(AppContext)
     const [timerState, setTimerState] = useState(new Timer())
+    const [currentSet, setCurrentSet] = useState(1)
+    const [currentCycle, setCurrentCycle] = useState(1)
+    const [timeRemaining, setTimeRemainig] = useState(
+        getTotalTimeFromWorkoutArray(workout || [])
+    )
+
+    const { setBg, setRunning, workout: workoutObject } = useContext(AppContext)
 
     //timer
     useEffect(() => {
@@ -29,12 +38,16 @@ export const Working = ({ workout }) => {
             if (time === 1) {
                 setCurrentIndex(prevIndex => prevIndex + 1)
             }
+
+            if (timeRemaining > 0) {
+                setTimeRemainig(prev => prev - 1)
+            }
         }, 1000)
 
         setTimerState(t)
 
         return () => t.stop()
-    }, [time, workout, currentIndex])
+    }, [time, workout, currentIndex, timeRemaining])
 
     //audios
     useEffect(() => {
@@ -58,6 +71,7 @@ export const Working = ({ workout }) => {
         setType(workout[currentIndex]?.type)
     }, [currentIndex, workout])
 
+    /*funciones para los controlers de tiempo*/
     const restartWorkout = () => {
         timerState.pause()
         setTime(workout[0].time)
@@ -78,16 +92,49 @@ export const Working = ({ workout }) => {
         timerState.pause()
     }
 
+    /* control de la aecuencia */
+    const updateSetsAndCycles = () => {
+        if (workout[currentIndex - 1]) {
+            const workoutIten = workout[currentIndex - 1]
+
+            if (workoutIten.type === 'rest') {
+                setCurrentSet(prevSet => prevSet + 1)
+            } else if (workoutIten.type === 'longRest') {
+                setCurrentSet(1)
+                setCurrentCycle(prevCycle => prevCycle + 1)
+            }
+        }
+    }
+
+    useEffect(updateSetsAndCycles, [currentIndex])
+
+    useEffect(() => {
+        setTimeRemainig(getTotalTimeFromWorkoutArray(workout))
+    }, [workout])
+
     return (
-        <>
-            <Title text={String(TEXTS[type]).toUpperCase()} type={type} />
-            <Clock time={time} type={type} />
-            <TimeControls
-                handlePause={pauseWorkout}
-                handleResume={resumeWorkout}
-                handleStop={stopWorkout}
-                handleRestart={restartWorkout}
+        <WorkingContainer>
+            <div>
+                <Title text={String(TEXTS[type]).toUpperCase()} type={type} />
+                <Clock time={time} type={type} />
+                <TimeControls
+                    handlePause={pauseWorkout}
+                    handleResume={resumeWorkout}
+                    handleStop={stopWorkout}
+                    handleRestart={restartWorkout}
+                />
+            </div>
+
+            <WorkoutSequence
+                workoutArray={workout}
+                currentIndex={currentIndex}
+                currentType={workout[currentIndex].type}
+                sets={currentSet}
+                totalSets={workoutObject.sets}
+                cycles={currentCycle}
+                totalCycles={workoutObject.cycles}
+                remaining={timeRemaining}
             />
-        </>
+        </WorkingContainer>
     )
 }
