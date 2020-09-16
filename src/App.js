@@ -1,13 +1,11 @@
+import { AppStyled, Division } from './styles'
 import React, { useEffect, useState } from 'react'
 
+import { COLOR_TYPE } from './utils/constants'
 import { Title } from './components/Titles'
-import { WorkoutCreator } from './components/WorkoutCreator'
 import { TotalWorkout } from './components/TotalWorkout'
 import { Working } from './components/Working'
-
-import { COLOR_TYPE } from './utils/constants'
-
-import { AppStyled, Division } from './styles'
+import { WorkoutCreator } from './components/WorkoutCreator'
 import { createWorkoutArray } from './utils/utils'
 
 export const AppContext = React.createContext({})
@@ -16,12 +14,12 @@ function App() {
     const [bg, setBg] = useState(COLOR_TYPE['initial'])
     const [running, setRunning] = useState(false)
     const [workout, setWorkout] = useState({
-        preparation: 3,
-        work: 5,
-        rest: 1,
-        cycles: 3,
-        sets: 5,
-        longRest: 2,
+        preparation: 10,
+        work: 20,
+        rest: 10,
+        cycles: 2,
+        sets: 8,
+        longRest: 60,
     })
     const [workoutArray, setWorkoutArray] = useState([])
 
