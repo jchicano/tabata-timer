@@ -1,19 +1,20 @@
-import React, { useEffect, useState, useContext } from 'react'
-
-import { Clock } from '../Clock'
-import { TimeControls } from '../TimeControl'
-import { Title } from '../Titles'
-import { WorkoutSequence } from '../WorkoutSequence'
-import { WorkingContainer } from './styles'
+import { COLOR_TYPE, TEXTS } from '../../utils/constants'
+import React, { useContext, useEffect, useState } from 'react'
 
 import { AppContext } from '../../App'
-
-import tick from '../../assets/sounds/tick.mp3'
-import ding from '../../assets/sounds/ding.mp3'
-
+import { Clock } from '../Clock'
+import { TimeControls } from '../TimeControl'
 import { Timer } from '../../utils/timer'
-import { COLOR_TYPE, TEXTS } from '../../utils/constants'
+import { Title } from '../Titles'
+import { WorkingContainer } from './styles'
+import { WorkoutSequence } from '../WorkoutSequence'
+import cinco from '../../assets/sounds/cinco.mp3'
+import cuatro from '../../assets/sounds/cuatro.mp3'
+import ding from '../../assets/sounds/ding.mp3'
+import dos from '../../assets/sounds/dos.mp3'
 import { getTotalTimeFromWorkoutArray } from '../../utils/utils'
+import tres from '../../assets/sounds/tres.mp3'
+import uno from '../../assets/sounds/uno.mp3'
 
 export const Working = ({ workout }) => {
     const [time, setTime] = useState(workout.preparation)
@@ -51,11 +52,24 @@ export const Working = ({ workout }) => {
 
     //audios
     useEffect(() => {
-        if (time > 1 && time <= 5) {
-            const audio = new Audio(tick)
+        if (time === 5) {
+            const audio = new Audio(cinco)
             audio.play()
-        } else if (time === 1) {
-            const audio = new Audio(ding)
+        }
+        if (time === 4) {
+            const audio = new Audio(cuatro)
+            audio.play()
+        }
+        if (time === 3) {
+            const audio = new Audio(tres)
+            audio.play()
+        }
+        if (time === 2) {
+            const audio = new Audio(dos)
+            audio.play()
+        }
+        if (time === 1) {
+            const audio = new Audio(uno)
             audio.play()
         }
     }, [time, type])
