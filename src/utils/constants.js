@@ -11,11 +11,11 @@ export const ICONS = {
 export const TEXTS = {
     work: 'Ejercicio',
     rest: 'Descanso',
-    longRest: 'Descanso entre rondas',
+    longRest: 'Descanso largo',
     preparation: 'Preparación',
     sets: 'Series',
     cycles: 'Rondas',
-    finish: 'Entrenamiento terminado',
+    finish: 'Fin entrenamiento',
 }
 
 export const COLOR_TYPE = {
