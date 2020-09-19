@@ -4,8 +4,8 @@ export const TimeSelectorStyled = styled.div`
     width: 100%;
     padding: 1rem;
 
-    display: grid;
-    grid-template-columns: 85% 1fr;
+    /* display: grid; */
+    /* grid-template-columns: 85% 1fr; */
 
     background-color: ${props => (props.color ? props.color : '')};
     border: 3px solid ${props => (props.color ? props.color : '')};
@@ -21,6 +21,12 @@ export const TimeSelectorStyled = styled.div`
         grid-template-columns: 10% 1fr;
         grid-column-gap: 24px;
         align-items: center;
+
+        @media (max-width: 576px) {
+            
+            /* TODO here espacio equivale a intro en desanso largo */
+            white-space: nowrap;
+        }
 
         span {
             font-size: 1.5rem;
