@@ -36,24 +36,36 @@ function App() {
 
     return (
         <AppContext.Provider value={{ setBg, setRunning, workout, setWorkout }}>
-            <AppStyled color={bg}>
-                {running ? (
-                    <>
-                        <Working workout={workoutArray} />
-                    </>
-                ) : (
-                    <>
-                        <Title text={'Tabata Timer'} />
-                        <Division>
-                            <WorkoutCreator />
-                            <TotalWorkout
-                                workout={workoutArray}
-                                handleStart={startWorkout}
-                            />
-                        </Division>
-                    </>
-                )}
-            </AppStyled>
+            <div className="bg-dark">
+                <div className="container-fluid pb-5">
+                    {running ? (
+                        <>
+                            <Working workout={workoutArray} />
+                        </>
+                    ) : (
+                        <>
+                            <div className="row">
+                                <div className="col-md-12">
+                                    <Title text={'Tabata Timer'} />
+                                </div>
+                            </div>
+                            {/* <Division> */}
+                            <div className="row">
+                                <div className="col-md-8 col-sm-12">
+                                    <WorkoutCreator />
+                                </div>
+                                <div className="col-md-4 col-sm-12 pt-5">
+                                    <TotalWorkout
+                                        workout={workoutArray}
+                                        handleStart={startWorkout}
+                                    />
+                                </div>
+                            </div>
+                            {/* </Division> */}
+                        </>
+                    )}
+                </div>
+            </div>
         </AppContext.Provider>
     )
 }
