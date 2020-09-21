@@ -1,6 +1,5 @@
+import { Button, Container } from './styles'
 import React, { useState } from 'react'
-
-import { Container, Button } from './styles'
 
 export const TimeControls = ({
     handleResume,
@@ -38,7 +37,7 @@ export const TimeControls = ({
     }
 
     return (
-        <Container>
+        <Container className="pb-5">
             <Button onClick={onRestart}>
                 <i className="fas fa-redo"></i>
             </Button>

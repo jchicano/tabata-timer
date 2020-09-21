@@ -127,9 +127,12 @@ export const Working = ({ workout }) => {
     }, [workout])
 
     return (
-        <WorkingContainer>
-            <div>
-                <Title text={String(TEXTS[type]).toUpperCase()} type={type} />
+        <div className="row">
+            <div className="col-sm-8">
+                <Title
+                    text={String(TEXTS[type]).toUpperCase()}
+                    type={type}
+                />
                 <Clock time={time} type={type} />
                 <TimeControls
                     handlePause={pauseWorkout}
@@ -139,16 +142,18 @@ export const Working = ({ workout }) => {
                 />
             </div>
 
-            <WorkoutSequence
-                workoutArray={workout}
-                currentIndex={currentIndex}
-                currentType={workout[currentIndex].type}
-                sets={currentSet}
-                totalSets={workoutObject.sets}
-                cycles={currentCycle}
-                totalCycles={workoutObject.cycles}
-                remaining={timeRemaining}
-            />
-        </WorkingContainer>
+            <div className="col-sm-4">
+                <WorkoutSequence
+                    workoutArray={workout}
+                    currentIndex={currentIndex}
+                    currentType={workout[currentIndex].type}
+                    sets={currentSet}
+                    totalSets={workoutObject.sets}
+                    cycles={currentCycle}
+                    totalCycles={workoutObject.cycles}
+                    remaining={timeRemaining}
+                />
+            </div>
+        </div>
     )
 }

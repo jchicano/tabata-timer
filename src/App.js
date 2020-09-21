@@ -1,7 +1,7 @@
-import { AppStyled, Division } from './styles'
 import React, { useEffect, useState } from 'react'
 
 import { COLOR_TYPE } from './utils/constants'
+import { Division } from './styles'
 import { Title } from './components/Titles'
 import { TotalWorkout } from './components/TotalWorkout'
 import { Working } from './components/Working'
@@ -37,7 +37,7 @@ function App() {
     return (
         <AppContext.Provider value={{ setBg, setRunning, workout, setWorkout }}>
             <div className="bg-dark">
-                <div className="container-fluid pb-5">
+                <div className="container-fluid pt-5 pb-5">
                     {running ? (
                         <>
                             <Working workout={workoutArray} />
@@ -49,19 +49,17 @@ function App() {
                                     <Title text={'Tabata Timer'} />
                                 </div>
                             </div>
-                            {/* <Division> */}
                             <div className="row">
                                 <div className="col-md-8 col-sm-12">
                                     <WorkoutCreator />
                                 </div>
-                                <div className="col-md-4 col-sm-12 pt-5">
+                                <div className="col-md-4 col-sm-12 pt-3">
                                     <TotalWorkout
                                         workout={workoutArray}
                                         handleStart={startWorkout}
                                     />
                                 </div>
                             </div>
-                            {/* </Division> */}
                         </>
                     )}
                 </div>
