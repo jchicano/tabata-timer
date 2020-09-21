@@ -4,6 +4,10 @@ import styled from 'styled-components'
 export const TitleStyled = styled.h1`
     font-size: 3rem;
     line-height: 3rem;
+    @media (max-width: 576px) {
+        font-size: 10vw;
+        line-height: 10vw;
+    }
     color: ${props => props.color};
     text-align: center;
 

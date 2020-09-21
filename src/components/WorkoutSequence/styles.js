@@ -18,6 +18,8 @@ export const SequenceHeader = styled.div`
     width: 100%;
     padding: 1rem;
 
+    overflow: hidden;
+
     display: grid;
     grid-template-columns: 1fr 1fr 2fr;
 
@@ -30,13 +32,14 @@ export const SequenceHeader = styled.div`
         justify-content: center;
 
         span {
-            font-size: 20px;
+            /* font-size: 20px; */
             color: /* ${props => props.color} */ #000;
             text-transform: uppercase;
         }
 
         p {
-            font-size: 36px;
+            /* font-size: 36px; */
+            font-size: 30px;
             font-weight: bold;
             color:/*  ${props => props.color}; */ #000;
         }

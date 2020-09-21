@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react'
-
 import { COLOR_TYPE, TEXTS } from '../../utils/constants'
-import { secondsToMinutes } from '../../utils/utils'
+import React, { useEffect, useRef, useState } from 'react'
 import {
+    Sequence,
     SequenceContainer,
     SequenceHeader,
-    Sequence,
     SequenceItem,
 } from './styles'
+
+import { secondsToMinutes } from '../../utils/utils'
 
 export const WorkoutSequence = ({
     workoutArray,
@@ -34,7 +34,7 @@ export const WorkoutSequence = ({
     useEffect(nextSequenceItem, [currentIndex])
 
     return (
-        <SequenceContainer>
+        <SequenceContainer className=".d-none .d-md-block">
             <SequenceHeader color={COLOR_TYPE[currentType]}>
                 <div>
                     <span>Series</span>
@@ -49,7 +49,7 @@ export const WorkoutSequence = ({
                     </p>
                 </div>
                 <div>
-                    <span>Tiempo restante</span>
+                    <span>Restante</span>
                     <p>{secondsToMinutes(remaining)}</p>
                 </div>
             </SequenceHeader>
